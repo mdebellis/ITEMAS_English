@@ -1,0 +1,3511 @@
+@prefix : <http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix kw: <http://franz.com/ns/keyword#> .
+@prefix nd: <http://franz.com/ns/allegrograph/5.0/geo/nd#> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+@prefix err: <http://www.w3.org/2005/xqt-errors#> .
+@prefix fti: <http://franz.com/ns/allegrograph/2.2/textindex/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ndfn: <http://franz.com/ns/allegrograph/5.0/geo/nd/fn#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix keyword: <http://franz.com/ns/keyword#> .
+@base <http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2> .
+
+<http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2> rdf:type owl:Ontology ;
+                                                                rdfs:comment "Changed on 11/1/2024 by Michael DeBellis. Made an English Version. Moved the Spanish labels to: skos:altLabel and generated English translations (with help of ChatGPT Code Generator) which I them made the value of the rdfs:label property for each Entity. There were just a few labels that were problematic and will need to be manually changed." ,
+                                                                             "Changed on 11/1/2024 by Michael DeBellis: mdebellissf@gmail.com Generated labels for all the entities using SPARQL. Also, saved to Turtle as it is less verbose than RDF/XML" ,
+                                                                             "Changed on 11/4/2024 b Michael DeBellis. I realized that it wasn't a good design to use different properties for Spanish and English. For more detail see: https://www.michaeldebellis.com/post/generating_english_ontology_labels  So I moved all the Spanish labels from skos:prefLabel to rdfs:label and added an \"@es\" Language Tag to them. Since now both the Enlish and Spanish labels have language tags the same ontology can be used for both and the user can use the Renderer options in Protege (see my blog link above for more details) to decide which label thay want to see." ,
+                                                                             "Ontología para innovación tecnológica en medicina" ;
+                                                                rdfs:isDefinedBy "ITEMAS" ;
+                                                                owl:versionInfo 3.0 .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://www.w3.org/2004/02/skos/core#altLabel
+skos:altLabel rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#prefLabel
+skos:prefLabel rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#AccionProyecto
+:AccionProyecto rdf:type owl:ObjectProperty ;
+                owl:inverseOf :puedeDarAccion ;
+                rdf:type owl:FunctionalProperty ;
+                rdfs:domain :Accion_Comercial ;
+                rdfs:range :Proyecto ;
+                rdfs:comment "Project Action"@en ;
+                rdfs:label " Accion Proyecto"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Autor
+:Autor rdf:type owl:ObjectProperty ;
+       owl:inverseOf :escribe ;
+       rdfs:domain :Articulo ;
+       rdfs:range :Empleado_Centro ;
+       rdfs:comment "Author"@en ;
+       rdfs:label " Autor"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#DesarrolloDaA
+:DesarrolloDaA rdf:type owl:ObjectProperty ;
+               rdfs:domain :Desarrollo_Tecnologico ;
+               rdfs:range :Mejora_Tecnologica ,
+                          :Proceso ,
+                          :Producto ;
+               rdfs:label " Desarrollo Da A"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#EvaluaciónDe
+:EvaluaciónDe rdf:type owl:ObjectProperty ;
+              owl:inverseOf :tieneEvaluacion ;
+              rdfs:domain :Evaluacion_Marcha_Proyecto ;
+              rdfs:range :Proyecto ;
+              rdfs:label " Evaluación De"@es ,
+                         "Evaluation Of"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#NaceDe
+:NaceDe rdf:type owl:ObjectProperty ;
+        owl:inverseOf :daLugarA ;
+        rdfs:domain :Proyecto ;
+        rdfs:label " Nace De"@es ,
+                   "Born Of"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#ProcesoDaA
+:ProcesoDaA rdf:type owl:ObjectProperty ;
+            owl:inverseOf :vieneDeProceso ;
+            rdfs:domain :Proceso ;
+            rdfs:range :Producto ;
+            rdfs:label " Proceso Da A"@es ,
+                       "Process Day A"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#PromovidoPorCentro
+:PromovidoPorCentro rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf :esPromovidoPor ;
+                    owl:inverseOf :promueve ;
+                    rdfs:domain :Ensayo_Clinico ;
+                    rdfs:range :Centro ;
+                    rdfs:label " Promovido Por Centro"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#PromovidoPorFarmaceutica
+:PromovidoPorFarmaceutica rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf :esPromovidoPor ;
+                          owl:inverseOf :promueveFarm ;
+                          rdfs:domain :Ensayo_Clinico ;
+                          rdfs:range :Farmaceutica ;
+                          rdfs:label " Promovido Por Farmaceutica"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#UAIDeCentro
+:UAIDeCentro rdf:type owl:ObjectProperty ;
+             owl:inverseOf :tieneUAI ;
+             rdf:type owl:FunctionalProperty ;
+             rdfs:domain :UAI ;
+             rdfs:range :Centro ;
+             rdfs:label " U A I De Centro"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#aPartirDeLicencia
+:aPartirDeLicencia rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Transferencia_Tecnologica ;
+                   rdfs:range :Licencia ;
+                   rdfs:label "Based On License"@en ,
+                              "a Partir De Licencia"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#acuerdoProviene
+:acuerdoProviene rdf:type owl:ObjectProperty ;
+                 owl:inverseOf :daLugarAcuerdo ;
+                 rdfs:domain :Acuerdo_Exclusividad ;
+                 rdfs:range :Resultado_Proyecto ;
+                 rdfs:label "Agreement Comes From"@en ,
+                            "acuerdo Proviene"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#arisesFrom
+:arisesFrom rdf:type owl:ObjectProperty ;
+            owl:inverseOf :generates ;
+            rdfs:domain :Proyecto ;
+            rdfs:range :Idea ;
+            rdfs:label "Arises From"@en ,
+                       "arises From"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#asisteA
+:asisteA rdf:type owl:ObjectProperty ;
+         owl:inverseOf :tieneAsistentes ;
+         rdfs:domain :Director_UAI ,
+                     :Responsable ;
+         rdfs:range :Reunion ;
+         rdfs:label "Attends"@en ,
+                    "asiste A"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#asisteEventos
+:asisteEventos rdf:type owl:ObjectProperty ;
+               owl:inverseOf :dirigidoA ;
+               rdfs:domain :Empleado ;
+               rdfs:range :Eventos_Difusion ;
+               rdfs:label "Attends Events"@en ,
+                          "asiste Eventos"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#daAConvocatoria
+:daAConvocatoria rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Politica_Tecnologica ;
+                 rdfs:range :Convocatoria ;
+                 rdfs:label "Leads To Call"@en ,
+                            "da A Convocatoria"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#daLugarA
+:daLugarA rdf:type owl:ObjectProperty ;
+          rdfs:range :Proyecto ;
+          rdfs:label "Leads To"@en ,
+                     "da Lugar A"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#daLugarADesarrollo
+:daLugarADesarrollo rdf:type owl:ObjectProperty ;
+                    owl:inverseOf :procedeResultados ;
+                    rdfs:domain :Resultado_Proyecto ;
+                    rdfs:range :Desarrollo_Tecnologico ;
+                    rdfs:label "Leads To Development"@en ,
+                               "da Lugar A Desarrollo"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#daLugarAEBT
+:daLugarAEBT rdf:type owl:ObjectProperty ;
+             owl:inverseOf :hayLicencia ;
+             rdfs:domain :Licencia ;
+             rdfs:range :EBT ;
+             rdfs:label "Leads To EBT"@en ,
+                        "da Lugar A E B T"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#daLugarAcuerdo
+:daLugarAcuerdo rdf:type owl:ObjectProperty ;
+                rdfs:domain :Resultado_Proyecto ;
+                rdfs:range :Acuerdo_Exclusividad ;
+                rdfs:label "Leads To Agreement"@en ,
+                           "da Lugar Acuerdo"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#desarrolla
+:desarrolla rdf:type owl:ObjectProperty ;
+            owl:inverseOf :esDesarrolladoPor ;
+            rdfs:domain :Centro ;
+            rdfs:range :Ensayo_Clinico ;
+            rdfs:label "Develops"@en ,
+                       "desarrolla"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#dirige
+:dirige rdf:type owl:ObjectProperty ;
+        owl:inverseOf :dirigidoPor ;
+        rdf:type owl:FunctionalProperty ;
+        rdfs:domain :Responsable ;
+        rdfs:range :Centro ;
+        rdfs:label "Directs"@en ,
+                   "dirige"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#dirigidaPor
+:dirigidaPor rdf:type owl:ObjectProperty ;
+             rdfs:domain :UAI ;
+             rdfs:range :Director_UAI ;
+             rdfs:label "Directed By"@en ,
+                        "dirigida Por"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#dirigidoA
+:dirigidoA rdf:type owl:ObjectProperty ;
+           rdfs:domain :Eventos_Difusion ;
+           rdfs:range :Empleado ;
+           rdfs:label "Directed At"@en ,
+                      "dirigido A"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#dirigidoPor
+:dirigidoPor rdf:type owl:ObjectProperty ;
+             rdfs:domain :Centro ;
+             rdfs:range :Responsable ;
+             rdfs:label "Directed By"@en ,
+                        "dirigido Por"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#esColaboradoraEn
+:esColaboradoraEn rdf:type owl:ObjectProperty ;
+                  owl:inverseOf :tieneColaborador ;
+                  rdf:type owl:FunctionalProperty ;
+                  rdfs:domain :Organizacion ;
+                  rdfs:range :ITEMAS ;
+                  rdfs:label "Collaborates In"@en ,
+                             "es Colaboradora En"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#esDeEmpleado
+:esDeEmpleado rdf:type owl:ObjectProperty ;
+              owl:inverseOf :tieneCaracteristicasEmpleado ;
+              rdfs:domain :Caracteristicas_Empleados ;
+              rdfs:range :Empleado ;
+              rdfs:label "Belongs To Employee"@en ,
+                         "es De Empleado"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#esDesarrolladoPor
+:esDesarrolladoPor rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Ensayo_Clinico ;
+                   rdfs:range :Centro ;
+                   rdfs:label "Is Developed By"@en ,
+                              "es Desarrollado Por"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#esFirmadoPor
+:esFirmadoPor rdf:type owl:ObjectProperty ;
+              owl:inverseOf :firma ;
+              rdfs:domain :Acuerdo ;
+              rdfs:range :Organizacion ;
+              rdfs:label "Is Signed By"@en ,
+                         "es Firmado Por"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#esMiembroEn
+:esMiembroEn rdf:type owl:ObjectProperty ;
+             owl:inverseOf :tieneMiembro ;
+             rdfs:domain :Institucion ;
+             rdfs:range :ITEMAS ;
+             rdfs:label "Is Member In"@en ,
+                        "es Miembro En"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#esOriginadoEn
+:esOriginadoEn rdf:type owl:ObjectProperty ;
+               owl:inverseOf :originaObjetivo ;
+               rdfs:domain :Objetivo_I_D_i ;
+               rdfs:range :Politica_I_D_i ;
+               rdfs:label "Originates From"@en ,
+                          "es Originado En"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#esPromovidoPor
+:esPromovidoPor rdf:type owl:ObjectProperty ;
+                rdfs:domain :Ensayo_Clinico ;
+                rdfs:label "Is Promoted By"@en ,
+                           "es Promovido Por"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#esProtegidoPor
+:esProtegidoPor rdf:type owl:ObjectProperty ;
+                owl:inverseOf :protege ;
+                rdfs:domain :Resultado_Proyecto ;
+                rdfs:range :Derecho_Propiedad_Industrial ;
+                rdfs:label "Is Protected By"@en ,
+                           "es Protegido Por"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#esSociaDe
+:esSociaDe rdf:type owl:ObjectProperty ;
+           owl:inverseOf :formadoPor ;
+           rdfs:domain :Organizacion ;
+           rdfs:range :Consorcio ;
+           rdfs:label "Is Partner Of"@en ,
+                      "es Socia De"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#esUnInstrumento
+:esUnInstrumento rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Acuerdo ;
+                 rdfs:range :Instrumento_Legal ;
+                 rdfs:label "Is An Instrument"@en ,
+                            "es Un Instrumento"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#esUna
+:esUna rdf:type owl:ObjectProperty ;
+       rdfs:domain :Vigilancia_Tecnologica ;
+       rdfs:range :Actividad_Innovacion ;
+       rdfs:label "Is A"@en ,
+                  "es Una"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#escribe
+:escribe rdf:type owl:ObjectProperty ;
+         rdfs:domain :Empleado_Centro ;
+         rdfs:range :Articulo ;
+         rdfs:label "Writes"@en ,
+                    "escribe"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#estaEnFaseEmbudo
+:estaEnFaseEmbudo rdf:type owl:ObjectProperty ;
+                  owl:inverseOf :includes ;
+                  rdfs:range :Fase_Embudo ;
+                  rdfs:label "In Funnel Phase"@en ,
+                             "esta En Fase Embudo"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#estaFirmadoEn
+:estaFirmadoEn rdf:type owl:ObjectProperty ;
+               owl:inverseOf :finalidadContrato ;
+               rdfs:domain :Proyecto ;
+               rdfs:range :Contrato_I_D_i ;
+               rdfs:label "Signed In"@en ,
+                          "esta Firmado En"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#estaLicenciadoEn
+:estaLicenciadoEn rdf:type owl:ObjectProperty ;
+                  owl:inverseOf :licenciaUn ;
+                  rdfs:domain :Derecho_Propiedad_Industrial ;
+                  rdfs:range :Licencia ;
+                  rdfs:label "Licensed In"@en ,
+                             "esta Licenciado En"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#existeAccionComercial
+:existeAccionComercial rdf:type owl:ObjectProperty ;
+                       rdfs:domain :F4_Transferencia ;
+                       rdfs:range :Accion_Comercial ;
+                       rdfs:label "Commercial Action Exists"@en ,
+                                  "existe Accion Comercial"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#existeInforme
+:existeInforme rdf:type owl:ObjectProperty ;
+               rdfs:domain :F2_Evaluacion ;
+               rdfs:range :Informe ;
+               rdfs:label "Report Exists"@en ,
+                          "existe Informe"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#existeMercado
+:existeMercado rdf:type owl:ObjectProperty ;
+               rdfs:domain :F5_Mercado ;
+               rdfs:label "Market Exists"@en ,
+                          "existe Mercado"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#existePrototipo
+:existePrototipo rdf:type owl:ObjectProperty ;
+                 rdfs:domain :F3_Desarrollo ;
+                 rdfs:range :Prototipo_Homologacion_Ensayo ;
+                 rdfs:label "Prototype Exists"@en ,
+                            "existe Prototipo"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#explota
+:explota rdf:type owl:ObjectProperty ;
+         rdfs:domain :Explotacion ;
+         rdfs:label "Exploits"@en ,
+                    "explota"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#finalidadContrato
+:finalidadContrato rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Contrato_I_D_i ;
+                   rdfs:range :Proyecto ;
+                   rdfs:label "Contract Purpose"@en ,
+                              "finalidad Contrato"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#financia
+:financia rdf:type owl:ObjectProperty ;
+          owl:inverseOf :tieneEntidadFinanciera ;
+          rdfs:label "Finances"@en ,
+                     "financia"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#financiaUAI
+:financiaUAI rdf:type owl:ObjectProperty ;
+             rdfs:domain :ITEMAS ;
+             rdfs:range :Financiacion_UAI ;
+             rdfs:label "Finances UAI"@en ,
+                        "financia U A I"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#firma
+:firma rdf:type owl:ObjectProperty ;
+       rdfs:subPropertyOf owl:topObjectProperty ;
+       rdfs:domain :Organizacion ;
+       rdfs:range :Acuerdo ;
+       rdfs:label "Signs"@en ,
+                  "firma"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#formaParteDe
+:formaParteDe rdf:type owl:ObjectProperty ;
+              owl:inverseOf :incluyeConocimiento ;
+              rdfs:domain :Conocimiento ;
+              rdfs:range :Capital_Intelectual ;
+              rdfs:label "Is Part Of"@en ,
+                         "forma Parte De"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#formadoPor
+:formadoPor rdf:type owl:ObjectProperty ;
+            rdfs:domain :Consorcio ;
+            rdfs:range :Organizacion ;
+            rdfs:label "Formed By"@en ,
+                       "formado Por"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#genera
+:genera rdf:type owl:ObjectProperty ;
+        owl:inverseOf :surgede ;
+        rdfs:domain :Resultado_Proyecto ;
+        rdfs:range :Conocimiento ;
+        rdfs:label "Generates"@en ,
+                   "genera"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#generates
+:generates rdf:type owl:ObjectProperty ;
+           rdfs:domain :Idea ;
+           rdfs:range :Proyecto ;
+           rdfs:label "Generates"@en ,
+                      "generates"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#hayLicencia
+:hayLicencia rdf:type owl:ObjectProperty ;
+             rdfs:domain :EBT ;
+             rdfs:range :Licencia ;
+             rdfs:label "Has License"@en ,
+                        "hay Licencia"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#ideaPerteneceA
+:ideaPerteneceA rdf:type owl:ObjectProperty ;
+                owl:inverseOf :tieneIdea ;
+                rdfs:domain :Idea ;
+                rdfs:range :Empleado_Centro ;
+                rdfs:label "Idea Belongs To"@en ,
+                           "idea Pertenece A"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#implicaFase
+:implicaFase rdf:type owl:ObjectProperty ;
+             rdfs:range :Fase_Embudo ;
+             rdfs:label "Involves Phase"@en ,
+                        "implica Fase"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#includes
+:includes rdf:type owl:ObjectProperty ;
+          rdfs:domain :Fase_Embudo ;
+          rdfs:label "Includes"@en ,
+                     "includes"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#incluye
+:incluye rdf:type owl:ObjectProperty ;
+         rdfs:domain :Fase_Embudo ;
+         rdfs:range :Idea ;
+         rdfs:label "Includes"@en ,
+                    "incluye"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#incluyeConocimiento
+:incluyeConocimiento rdf:type owl:ObjectProperty ;
+                     rdfs:domain :Capital_Intelectual ;
+                     rdfs:range :Conocimiento ;
+                     rdfs:label "Includes Knowledge"@en ,
+                                "incluye Conocimiento"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#incluyeProyecto
+:incluyeProyecto rdf:type owl:ObjectProperty ;
+                 owl:inverseOf :tieneConvocatoria ;
+                 rdfs:domain :Convocatoria ;
+                 rdfs:range :Proyecto ;
+                 rdfs:label "Includes Project"@en ,
+                            "incluye Proyecto"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#licenciaUn
+:licenciaUn rdf:type owl:ObjectProperty ;
+            rdfs:domain :Licencia ;
+            rdfs:range :Derecho_Propiedad_Industrial ;
+            rdfs:label "Grants License"@en ,
+                       "licencia Un"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#llevaACaboProyecto
+:llevaACaboProyecto rdf:type owl:ObjectProperty ;
+                    owl:inverseOf :tieneConsorcio ;
+                    rdfs:domain :Consorcio ;
+                    rdfs:range :Proyecto ;
+                    rdfs:label "Carries Out Project"@en ,
+                               "lleva A Cabo Proyecto"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#objetivoSistema
+:objetivoSistema rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Sistema_Gestion_I_D_i ;
+                 rdfs:range :Politica_I_D_i ;
+                 rdfs:label "System Objective"@en ,
+                            "objetivo Sistema"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#organizaEvento
+:organizaEvento rdf:type owl:ObjectProperty ;
+                owl:inverseOf :organizadosPor ;
+                rdfs:domain :UAI ;
+                rdfs:range :Eventos_Difusion ;
+                rdfs:label "Organizes Event"@en ,
+                           "organiza Evento"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#organizadosPor
+:organizadosPor rdf:type owl:ObjectProperty ;
+                rdfs:domain :Eventos_Difusion ;
+                rdfs:range :UAI ;
+                rdfs:label "Organized By"@en ,
+                           "organizados Por"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#originaObjetivo
+:originaObjetivo rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Politica_I_D_i ;
+                 rdfs:range :Objetivo_I_D_i ;
+                 rdfs:label "Generates Objective"@en ,
+                            "origina Objetivo"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#participaEnProyecto
+:participaEnProyecto rdf:type owl:ObjectProperty ;
+                     owl:inverseOf :participadoPor ;
+                     rdfs:domain :Empresa ;
+                     rdfs:range :Proyecto ;
+                     rdfs:label "Participates In Project"@en ,
+                                "participa En Proyecto"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#participaSpinfOff
+:participaSpinfOff rdf:type owl:ObjectProperty ;
+                   owl:inverseOf :participadaPor ;
+                   rdfs:domain :Institucion ;
+                   rdfs:range :SpinOff ;
+                   rdfs:label "Participates Spin-Off"@en ,
+                              "participa Spinf Off"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#participadaPor
+:participadaPor rdf:type owl:ObjectProperty ;
+                rdfs:domain :SpinOff ;
+                rdfs:range :Institucion ;
+                rdfs:label "Participated By"@en ,
+                           "participada Por"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#participadoPor
+:participadoPor rdf:type owl:ObjectProperty ;
+                rdfs:domain :Proyecto ;
+                rdfs:range :Empresa ;
+                rdfs:label "Participated By"@en ,
+                           "participado Por"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#perteneceACentro
+:perteneceACentro rdf:type owl:ObjectProperty ;
+                  owl:inverseOf :tieneCaracteristicaCentro ;
+                  rdfs:domain :Caracteristicas_Centro ;
+                  rdfs:range :Centro ;
+                  rdfs:label "Belongs to Center"@en ,
+                             "pertenece A Centro"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#perteneceAGrupo
+:perteneceAGrupo rdf:type owl:ObjectProperty ;
+                 owl:inverseOf :tieneInvestigador ;
+                 rdf:type owl:FunctionalProperty ;
+                 rdfs:domain :Investigador ;
+                 rdfs:range :Grupo_Investigacion ;
+                 rdfs:label "Belongs to Group"@en ,
+                            "pertenece A Grupo"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#perteneceAProyecto
+:perteneceAProyecto rdf:type owl:ObjectProperty ;
+                    owl:inverseOf :tieneObjetivosProyecto ;
+                    rdfs:domain :Objetivo_Proyecto ;
+                    rdfs:range :Proyecto ;
+                    rdfs:label "Belongs to Project"@en ,
+                               "pertenece A Proyecto"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#perteneceATrUAI
+:perteneceATrUAI rdf:type owl:ObjectProperty ;
+                 owl:inverseOf :tieneFormacion ;
+                 rdfs:domain :Formacion ;
+                 rdfs:range :trabajaUAI ;
+                 rdfs:label "Belongs to UAI Transfer"@en ,
+                            "pertenece A Tr U A I"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#perteneceAUAI
+:perteneceAUAI rdf:type owl:ObjectProperty ;
+               owl:inverseOf :tieneUnidades ;
+               rdfs:domain :Unidades_UAI ;
+               rdfs:range :UAI ;
+               rdfs:label "Belongs to UAI"@en ,
+                          "pertenece A U A I"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#pertenecePatente
+:pertenecePatente rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Patente ;
+                  rdfs:range :Familia_Patente ;
+                  rdfs:label "Belongs to Patent"@en ,
+                             "pertenece Patente"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#perteneceUAI
+:perteneceUAI rdf:type owl:ObjectProperty ;
+              rdfs:domain :Financiacion_UAI ;
+              rdfs:range :UAI ;
+              rdfs:label "Belongs to UAI"@en ,
+                         "pertenece U A I"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#planifica
+:planifica rdf:type owl:ObjectProperty ;
+           owl:inverseOf :tienenPlanificacion ;
+           rdfs:domain :Planificacion_Actividades ;
+           rdfs:range :Actividad_I_D_i ;
+           rdfs:label "Plans"@en ,
+                      "planifica"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#procedeDeEmpleado
+:procedeDeEmpleado rdf:type owl:ObjectProperty ;
+                   owl:inverseOf :tieneIdea ;
+                   rdfs:domain :Idea ;
+                   rdfs:range :Empleado_Centro ;
+                   rdfs:label "Derives From Employee"@en ,
+                              "procede De Empleado"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#procedeResultados
+:procedeResultados rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Desarrollo_Tecnologico ;
+                   rdfs:range :Resultado_Proyecto ;
+                   rdfs:label "Derives From Results"@en ,
+                              "procede Resultados"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#promueve
+:promueve rdf:type owl:ObjectProperty ;
+          rdfs:domain :Centro ;
+          rdfs:range :Ensayo_Clinico ;
+          rdfs:label "Promotes"@en ,
+                     "promueve"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#promueveFarm
+:promueveFarm rdf:type owl:ObjectProperty ;
+              rdfs:domain :Farmaceutica ;
+              rdfs:range :Ensayo_Clinico ;
+              rdfs:label "Promotes Pharmaceutical"@en ,
+                         "promueve Farm"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#protege
+:protege rdf:type owl:ObjectProperty ;
+         rdfs:domain :Derecho_Propiedad_Industrial ;
+         rdfs:range :Resultado_Proyecto ;
+         rdfs:label "Protects"@en ,
+                    "protege"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#publica
+:publica rdf:type owl:ObjectProperty ;
+         rdfs:domain :Metodo_Diseminacion ;
+         rdfs:range :Resultado_Proyecto ;
+         rdfs:label "Publishes"@en ,
+                    "publica"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#puedeDarAInforme
+:puedeDarAInforme rdf:type owl:ObjectProperty ;
+                  owl:inverseOf :vieneDe ;
+                  rdfs:domain :Proyecto ;
+                  rdfs:range :Informe ;
+                  rdfs:label "Can Lead to Report"@en ,
+                             "puede Dar A Informe"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#puedeDarAccion
+:puedeDarAccion rdf:type owl:ObjectProperty ;
+                rdfs:domain :Proyecto ;
+                rdfs:range :Accion_Comercial ;
+                rdfs:label "Can Lead to Action"@en ,
+                           "puede Dar Accion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#puedeDarProt
+:puedeDarProt rdf:type owl:ObjectProperty ;
+              owl:inverseOf :vieneDePr ;
+              rdfs:domain :Proyecto ;
+              rdfs:range :Prototipo_Homologacion_Ensayo ;
+              rdfs:label "Can Lead to Prototype"@en ,
+                         "puede Dar Prot"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#realizaAccion
+:realizaAccion rdf:type owl:ObjectProperty ;
+               owl:inverseOf :realizadaPor ;
+               rdfs:domain :Organizacion ;
+               rdfs:range :Accion_Comercial ;
+               rdfs:label "Performs Action"@en ,
+                          "realiza Accion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#realizaActividades
+:realizaActividades rdf:type owl:ObjectProperty ;
+                    rdfs:domain :Proyecto ;
+                    rdfs:range :Actividad_I_D_i ;
+                    rdfs:label "Performs Activities"@en ,
+                               "realiza Actividades"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#realizaInvestigacion
+:realizaInvestigacion rdf:type owl:ObjectProperty ;
+                      rdfs:domain :Grupo_Investigacion ;
+                      rdfs:range :Actividad_Investigacion ;
+                      rdfs:label "Conducts Research"@en ,
+                                 "realiza Investigacion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#realizadaPor
+:realizadaPor rdf:type owl:ObjectProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain :Accion_Comercial ;
+              rdfs:range :Organizacion ;
+              rdfs:label "Carried Out By"@en ,
+                         "realizada Por"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#regidaPor
+:regidaPor rdf:type owl:ObjectProperty ;
+           rdfs:domain :Convocatoria ;
+           rdfs:range :Politica_Tecnologica ;
+           rdfs:label "Governed By"@en ,
+                      "regida Por"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#resultadoDe
+:resultadoDe rdf:type owl:ObjectProperty ;
+             owl:inverseOf :tieneResultados ;
+             rdfs:domain :Resultado_Proyecto ;
+             rdfs:range :Proyecto ;
+             rdfs:label "Result Of"@en ,
+                        "resultado De"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#surgeDeObjetivo
+:surgeDeObjetivo rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Meta_I_D_i ;
+                 rdfs:range :Objetivo_I_D_i ;
+                 rdfs:label "Arises From Objective"@en ,
+                            "surge De Objetivo"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#surgede
+:surgede rdf:type owl:ObjectProperty ;
+         rdfs:domain :Conocimiento ;
+         rdfs:range :Resultado_Proyecto ;
+         rdfs:label "Arises From"@en ,
+                    "surgede"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tiene
+:tiene rdf:type owl:ObjectProperty ;
+       rdfs:domain :UAI ;
+       rdfs:range :Financiacion_UAI ;
+       rdfs:label "has"@en ,
+                  "tiene"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneAsistentes
+:tieneAsistentes rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Reunion ;
+                 rdfs:range :Director_UAI ,
+                            :Responsable ;
+                 rdfs:label "Has Assistants"@en ,
+                            "tiene Asistentes"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneCapitalIntelectual
+:tieneCapitalIntelectual rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf :tieneCaracteristicaCentro ;
+                         rdfs:domain :Centro ;
+                         rdfs:range :Capital_Intelectual ;
+                         rdfs:label "Has Intellectual Capital"@en ,
+                                    "tiene Capital Intelectual"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneCaracteristicaCentro
+:tieneCaracteristicaCentro rdf:type owl:ObjectProperty ;
+                           rdfs:domain :Centro ;
+                           rdfs:range :Caracteristicas_Centro ;
+                           rdfs:label "Has Center Characteristics"@en ,
+                                      "tiene Caracteristica Centro"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneCaracteristicasEmpleado
+:tieneCaracteristicasEmpleado rdf:type owl:ObjectProperty ;
+                              rdfs:domain :Empleado ;
+                              rdfs:range :Caracteristicas_Empleados ;
+                              rdfs:label "Has Employee Characteristics"@en ,
+                                         "tiene Caracteristicas Empleado"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneColaborador
+:tieneColaborador rdf:type owl:ObjectProperty ;
+                  rdfs:domain :ITEMAS ;
+                  rdfs:range :Organizacion ;
+                  rdfs:label "Has Collaborator"@en ,
+                             "tiene Colaborador"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneCompetencias
+:tieneCompetencias rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf :tieneCaracteristicasEmpleado ;
+                   rdfs:domain :Empleado ;
+                   rdfs:range :Competencias ;
+                   rdfs:label "Has Competencies"@en ,
+                              "tiene Competencias"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneConsorcio
+:tieneConsorcio rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :tieneProyecto ;
+                rdfs:domain :Proyecto ;
+                rdfs:range :Consorcio ;
+                rdfs:label "Has Consortium"@en ,
+                           "tiene Consorcio"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneConvocatoria
+:tieneConvocatoria rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf :tieneProyecto ;
+                   rdfs:domain :Proyecto ;
+                   rdfs:range :Convocatoria ;
+                   rdfs:label "Has Call for Proposals"@en ,
+                              "tiene Convocatoria"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneCulturaInnovadora
+:tieneCulturaInnovadora rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf :tieneCaracteristicaCentro ;
+                        rdfs:domain :Centro ;
+                        rdfs:range :Cultura_Innovadora ;
+                        rdfs:label "Has Innovative Culture"@en ,
+                                   "tiene Cultura Innovadora"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneEntidadFinanciera
+:tieneEntidadFinanciera rdf:type owl:ObjectProperty ;
+                        rdfs:domain :Proyecto ;
+                        rdfs:range :Organizacion ;
+                        rdfs:label "Has Financial Entity"@en ,
+                                   "tiene Entidad Financiera"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneEvaluacion
+:tieneEvaluacion rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :tieneProyecto ;
+                 rdfs:domain :Proyecto ;
+                 rdfs:range :Evaluacion_Marcha_Proyecto ;
+                 rdfs:label "Has Evaluation"@en ,
+                            "tiene Evaluacion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneFormacion
+:tieneFormacion rdf:type owl:ObjectProperty ;
+                rdfs:domain :trabajaUAI ;
+                rdfs:range :Formacion ;
+                rdfs:label "Has Training"@en ,
+                           "tiene Formacion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneIdea
+:tieneIdea rdf:type owl:ObjectProperty ;
+           rdfs:domain :Empleado_Centro ;
+           rdfs:range :Idea ;
+           rdfs:label "Has Idea"@en ,
+                      "tiene Idea"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneIdeaI
+:tieneIdeaI rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :tieneIdea ;
+            rdfs:label "Has I Idea"@en ,
+                       "tiene Idea I"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneIdeaII
+:tieneIdeaII rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :tieneIdea ;
+             rdfs:label "Has II Idea"@en ,
+                        "tiene Idea I I"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneInvestigador
+:tieneInvestigador rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Grupo_Investigacion ;
+                   rdfs:range :Investigador ;
+                   rdfs:label "Has Researcher"@en ,
+                              "tiene Investigador"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneLicencia
+:tieneLicencia rdf:type owl:ObjectProperty ;
+               rdfs:domain :Derecho_Propiedad_Industrial ;
+               rdfs:range :Licencia ;
+               rdfs:label "Has License"@en ,
+                          "tiene Licencia"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneLicenciaDA
+:tieneLicenciaDA rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :tieneLicencia ;
+                 rdfs:domain :Derecho_Autor ;
+                 rdfs:range :Licencia ;
+                 rdfs:label "Has DA License"@en ,
+                            "tiene Licencia D A"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneLicenciaKH
+:tieneLicenciaKH rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :tieneLicencia ;
+                 rdfs:domain :Know_How ;
+                 rdfs:range :Licencia ;
+                 rdfs:label "Has KH License"@en ,
+                            "tiene Licencia K H"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneLicenciaPI
+:tieneLicenciaPI rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :tieneLicencia ;
+                 rdfs:domain :PI_Explotacion ;
+                 rdfs:range :Licencia ;
+                 rdfs:label "Has PI License"@en ,
+                            "tiene Licencia P I"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneLicenciaPS
+:tieneLicenciaPS rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :tieneLicencia ;
+                 rdfs:range :Licencia ;
+                 rdfs:label "Has PS License"@en ,
+                            "tiene Licencia P S"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneLicenciaSI
+:tieneLicenciaSI rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :tieneLicencia ;
+                 rdfs:domain :Secreto_Industrial ;
+                 rdfs:range :Licencia ;
+                 rdfs:label "Has SI License"@en ,
+                            "tiene Licencia S I"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneMetaI_D_i
+:tieneMetaI_D_i rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :tieneCaracteristicaCentro ;
+                rdfs:domain :Centro ;
+                rdfs:range :Meta_I_D_i ;
+                rdfs:label "Has R&D&I Goal"@en ,
+                           "tiene Meta I_ D_i"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneMiembro
+:tieneMiembro rdf:type owl:ObjectProperty ;
+              rdfs:domain :ITEMAS ;
+              rdfs:range :Institucion ;
+              rdfs:label "Has Member"@en ,
+                         "tiene Miembro"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneObjetivoI_D_i
+:tieneObjetivoI_D_i rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf :tieneCaracteristicaCentro ;
+                    rdfs:domain :Centro ;
+                    rdfs:range :Objetivo_I_D_i ;
+                    rdfs:label "Has R&D&I Objective"@en ,
+                               "tiene Objetivo I_ D_i"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneObjetivosProyecto
+:tieneObjetivosProyecto rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf :tieneProyecto ;
+                        rdfs:domain :Proyecto ;
+                        rdfs:range :Objetivo_Proyecto ;
+                        rdfs:label "Has Project Objectives"@en ,
+                                   "tiene Objetivos Proyecto"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tienePatente
+:tienePatente rdf:type owl:ObjectProperty ;
+              rdfs:domain :Familia_Patente ;
+              rdfs:range :Patente ;
+              rdfs:label "Has Patent"@en ,
+                         "tiene Patente"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tienePoliticaI_D_i
+:tienePoliticaI_D_i rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf :tieneCaracteristicaCentro ;
+                    rdfs:domain :Centro ;
+                    rdfs:range :Politica_I_D_i ;
+                    rdfs:label "Has R&D&I Policy"@en ,
+                               "tiene Politica I_ D_i"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneProyecto
+:tieneProyecto rdf:type owl:ObjectProperty ;
+               rdfs:domain :Proyecto ;
+               rdfs:range :Caracteristicas_proyecto ;
+               rdfs:label "Has Project"@en ,
+                          "tiene Proyecto"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneResponsabilidades
+:tieneResponsabilidades rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf :tieneCaracteristicasEmpleado ;
+                        rdfs:domain :Empleado ;
+                        rdfs:range :Responsabilidades ;
+                        rdfs:label "Has Responsibilities"@en ,
+                                   "tiene Responsabilidades"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneResultados
+:tieneResultados rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :tieneProyecto ;
+                 rdfs:domain :Proyecto ;
+                 rdfs:range :Resultado_Proyecto ;
+                 rdfs:label "Has Results"@en ,
+                            "tiene Resultados"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneSistemaGestionI_D_i
+:tieneSistemaGestionI_D_i rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf :tieneCaracteristicaCentro ;
+                          rdfs:domain :Centro ;
+                          rdfs:range :Sistema_Gestion_I_D_i ;
+                          rdfs:label "Has R&D&I Management System"@en ,
+                                     "tiene Sistema Gestion I_ D_i"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneUAI
+:tieneUAI rdf:type owl:ObjectProperty ,
+                   owl:FunctionalProperty ;
+          rdfs:domain :Centro ;
+          rdfs:range :UAI ;
+          rdfs:label "Has UAI"@en ,
+                     "tiene U A I"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tieneUnidades
+:tieneUnidades rdf:type owl:ObjectProperty ;
+               rdfs:domain :UAI ;
+               rdfs:range :Unidades_UAI ;
+               rdfs:label "Has Units"@en ,
+                          "tiene Unidades"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tienenPlanificacion
+:tienenPlanificacion rdf:type owl:ObjectProperty ;
+                     rdfs:domain :Actividad_I_D_i ;
+                     rdfs:range :Planificacion_Actividades ;
+                     rdfs:label "Has Planning"@en ,
+                                "tienen Planificacion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#trabajaEn
+:trabajaEn rdf:type owl:ObjectProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain :Empleado ;
+           rdfs:range :Organizacion ;
+           rdfs:label "Works In"@en ,
+                      "trabaja En"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#transfiere
+:transfiere rdf:type owl:ObjectProperty ;
+            rdfs:domain :Contrato_Transferencia ;
+            rdfs:range :Conocimiento ;
+            rdfs:label "Transfers"@en ,
+                       "transfiere"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#vieneDe
+:vieneDe rdf:type owl:ObjectProperty ;
+         rdfs:domain :Informe ;
+         rdfs:range :Proyecto ;
+         rdfs:label "From"@en ,
+                    "viene De"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#vieneDePr
+:vieneDePr rdf:type owl:ObjectProperty ;
+           rdfs:domain :Prototipo_Homologacion_Ensayo ;
+           rdfs:range :Proyecto ;
+           rdfs:label "From PR"@en ,
+                      "viene De Pr"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#vieneDeProceso
+:vieneDeProceso rdf:type owl:ObjectProperty ;
+                rdfs:domain :Producto ;
+                rdfs:range :Proceso ;
+                rdfs:label "From Process"@en ,
+                           "viene De Proceso"@es .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#ambitoFormacion
+:ambitoFormacion rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf :propiedadesFormacion ;
+                 rdfs:range [ rdf:type rdfs:Datatype ;
+                              owl:oneOf [ rdf:type rdf:List ;
+                                          rdf:first "Internacional" ;
+                                          rdf:rest [ rdf:type rdf:List ;
+                                                     rdf:first "Nacional" ;
+                                                     rdf:rest rdf:nil
+                                                   ]
+                                        ]
+                            ] ;
+                 rdfs:label "Training Scope"@en ,
+                            "ambito Formacion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#ambitoOrganizacion
+:ambitoOrganizacion rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf :propiedadesOrganizacion ;
+                    rdfs:domain :Organizacion ;
+                    rdfs:range [ rdf:type rdfs:Datatype ;
+                                 owl:oneOf [ rdf:type rdf:List ;
+                                             rdf:first "Internacional" ;
+                                             rdf:rest [ rdf:type rdf:List ;
+                                                        rdf:first "Nacional" ;
+                                                        rdf:rest rdf:nil
+                                                      ]
+                                           ]
+                               ] ;
+                    rdfs:label "Organization Scope"@en ,
+                               "ambito Organizacion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#ambitoProyecto
+:ambitoProyecto rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf :propiedadesProyecto ;
+                rdfs:range [ rdf:type rdfs:Datatype ;
+                             owl:oneOf [ rdf:type rdf:List ;
+                                         rdf:first "Internacional" ;
+                                         rdf:rest [ rdf:type rdf:List ;
+                                                    rdf:first "Nacional" ;
+                                                    rdf:rest [ rdf:type rdf:List ;
+                                                               rdf:first "Regional" ;
+                                                               rdf:rest rdf:nil
+                                                             ]
+                                                  ]
+                                       ]
+                           ] ;
+                rdfs:label "Project Scope"@en ,
+                           "ambito Proyecto"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#areaEstrategica
+:areaEstrategica rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Actividad_I_D_i ;
+                 rdfs:label "Strategic Area"@en ,
+                            "area Estrategica"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#cuantiaEnsayo
+:cuantiaEnsayo rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf :propiedadesEnsayo ;
+               rdfs:label "Trial Amount"@en ,
+                          "cuantia Ensayo"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#cuantiaLicencia
+:cuantiaLicencia rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Licencia ;
+                 rdfs:label "License Amount"@en ,
+                            "cuantia Licencia"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#ebitda
+:ebitda rdf:type owl:DatatypeProperty ;
+        rdfs:subPropertyOf :propiedadesEBT ;
+        rdfs:label "EBITDA"@en ,
+                   "ebitda"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#facturacionEBT
+:facturacionEBT rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf :propiedadesEBT ;
+                rdfs:label "EBT Billing"@en ,
+                           "facturacion E B T"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#fechaEnsayo
+:fechaEnsayo rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf :propiedadesEnsayo ;
+             rdfs:label "Trial Date"@en ,
+                        "fecha Ensayo"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#financiacionITEMAS
+:financiacionITEMAS rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :ITEMAS ;
+                    rdfs:range xsd:double ;
+                    rdfs:label "ITEMAS Financing"@en ,
+                               "financiacion I T E M A S"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#fondosCaptadosEBT
+:fondosCaptadosEBT rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf :propiedadesEBT ;
+                   rdfs:label "EBT Funds Captured"@en ,
+                              "fondos Captados E B T"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#frecuencia
+:frecuencia rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Reunion ;
+            rdfs:label "Frequency"@en ,
+                       "frecuencia"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#gruposTrabajo
+:gruposTrabajo rdf:type owl:DatatypeProperty ;
+               rdfs:domain :ITEMAS ;
+               rdfs:label "Work Groups"@en ,
+                          "grupos Trabajo"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#jcr
+:jcr rdf:type owl:DatatypeProperty ;
+     rdfs:domain :trabajaUAI ;
+     rdfs:label "JCR"@en ,
+                "jcr"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#jerarquia
+:jerarquia rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Director_UAI ;
+           rdfs:label "Hierarchy"@en ,
+                      "jerarquia"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#oficinaPatente
+:oficinaPatente rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf :propiedadesPatente ;
+                rdfs:label "Patent Office"@en ,
+                           "oficina Patente"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#propiedadesEBT
+:propiedadesEBT rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf owl:topDataProperty ;
+                rdfs:domain :EBT ;
+                rdfs:label "EBT Properties"@en ,
+                           "propiedades E B T"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#propiedadesEnsayo
+:propiedadesEnsayo rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :Ensayo_Clinico ;
+                   rdfs:label "Trial Properties"@en ,
+                              "propiedades Ensayo"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#propiedadesFormacion
+:propiedadesFormacion rdf:type owl:DatatypeProperty ;
+                      rdfs:domain :Formacion ;
+                      rdfs:label "Training Properties"@en ,
+                                 "propiedades Formacion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#propiedadesOrganizacion
+:propiedadesOrganizacion rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf owl:topDataProperty ;
+                         rdfs:domain :Organizacion ;
+                         rdfs:label "Organization Properties"@en ,
+                                    "propiedades Organizacion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#propiedadesPatente
+:propiedadesPatente rdf:type owl:DatatypeProperty ;
+                    rdfs:label "Patent Properties"@en ,
+                               "propiedades Patente"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#propiedadesProyecto
+:propiedadesProyecto rdf:type owl:DatatypeProperty ;
+                     rdfs:domain :Proyecto ;
+                     rdfs:label "Project Properties"@en ,
+                                "propiedades Proyecto"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#resolucion
+:resolucion rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Convocatoria ;
+            rdfs:label "Resolution"@en ,
+                       "resolucion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#revista
+:revista rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Articulo ;
+         rdfs:range [ rdf:type rdfs:Datatype ;
+                      owl:oneOf [ rdf:type rdf:List ;
+                                  rdf:first "AHCI" ;
+                                  rdf:rest [ rdf:type rdf:List ;
+                                             rdf:first "SCI" ;
+                                             rdf:rest [ rdf:type rdf:List ;
+                                                        rdf:first "SSCI" ;
+                                                        rdf:rest rdf:nil
+                                                      ]
+                                           ]
+                                ]
+                    ] ;
+         rdfs:label "Journal"@en ,
+                    "Publication"@en ,
+                    "revista"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tipoActividadInnovacion
+:tipoActividadInnovacion rdf:type owl:DatatypeProperty ;
+                         rdfs:domain :Actividad_Innovacion ;
+                         rdfs:range [ rdf:type rdfs:Datatype ;
+                                      owl:oneOf [ rdf:type rdf:List ;
+                                                  rdf:first "InnovacionEnTecnologia" ;
+                                                  rdf:rest [ rdf:type rdf:List ;
+                                                             rdf:first "InnovacionGestion" ;
+                                                             rdf:rest [ rdf:type rdf:List ;
+                                                                        rdf:first "InnovacionTecnologica" ;
+                                                                        rdf:rest rdf:nil
+                                                                      ]
+                                                           ]
+                                                ]
+                                    ] ;
+                         rdfs:label "Innovation Activity Type"@en ,
+                                    "tipo Actividad Innovacion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tipoFormacion
+:tipoFormacion rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf :propiedadesFormacion ;
+               rdfs:range [ rdf:type rdfs:Datatype ;
+                            owl:oneOf [ rdf:type rdf:List ;
+                                        rdf:first "ActividadesFormativas_ITEMAS" ;
+                                        rdf:rest [ rdf:type rdf:List ;
+                                                   rdf:first "Cursos_Especializacion" ;
+                                                   rdf:rest [ rdf:type rdf:List ;
+                                                              rdf:first "Doctorado" ;
+                                                              rdf:rest [ rdf:type rdf:List ;
+                                                                         rdf:first "MBA_Master" ;
+                                                                         rdf:rest [ rdf:type rdf:List ;
+                                                                                    rdf:first "Otras_Actividades" ;
+                                                                                    rdf:rest [ rdf:type rdf:List ;
+                                                                                               rdf:first "Otros_Cursos" ;
+                                                                                               rdf:rest rdf:nil
+                                                                                             ]
+                                                                                  ]
+                                                                       ]
+                                                            ]
+                                                 ]
+                                      ]
+                          ] ;
+               rdfs:label "Training Type"@en ,
+                          "tipo Formacion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tipoIdea
+:tipoIdea rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Idea ;
+          rdfs:range [ rdf:type rdfs:Datatype ;
+                       owl:oneOf [ rdf:type rdf:List ;
+                                   rdf:first "Bio" ;
+                                   rdf:rest [ rdf:type rdf:List ;
+                                              rdf:first "Farma" ;
+                                              rdf:rest [ rdf:type rdf:List ;
+                                                         rdf:first "Imagen" ;
+                                                         rdf:rest [ rdf:type rdf:List ;
+                                                                    rdf:first "Materiales_Dispositivos" ;
+                                                                    rdf:rest [ rdf:type rdf:List ;
+                                                                               rdf:first "Organizativa_Asistencial" ;
+                                                                               rdf:rest [ rdf:type rdf:List ;
+                                                                                          rdf:first "TIC_Salud" ;
+                                                                                          rdf:rest rdf:nil
+                                                                                        ]
+                                                                             ]
+                                                                  ]
+                                                       ]
+                                            ]
+                                 ]
+                     ] ;
+          rdfs:label "Idea Type"@en ,
+                     "tipo Idea"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tipoOrganizacion
+:tipoOrganizacion rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf :propiedadesOrganizacion ;
+                  rdfs:domain :Organizacion ;
+                  rdfs:range [ rdf:type rdfs:Datatype ;
+                               owl:oneOf [ rdf:type rdf:List ;
+                                           rdf:first "Privada" ;
+                                           rdf:rest [ rdf:type rdf:List ;
+                                                      rdf:first "Publica" ;
+                                                      rdf:rest rdf:nil
+                                                    ]
+                                         ]
+                             ] ;
+                  rdfs:label "Organization Type"@en ,
+                             "tipo Organizacion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#tipoProyecto
+:tipoProyecto rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf :propiedadesProyecto ;
+              rdfs:range [ rdf:type rdfs:Datatype ;
+                           owl:oneOf [ rdf:type rdf:List ;
+                                       rdf:first "Privado" ;
+                                       rdf:rest [ rdf:type rdf:List ;
+                                                  rdf:first "Publico" ;
+                                                  rdf:rest rdf:nil
+                                                ]
+                                     ]
+                         ] ;
+              rdfs:label "Project Type"@en ,
+                         "tipo Proyecto"@es .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Accion_Comercial
+:Accion_Comercial rdf:type owl:Class ;
+                  rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                    owl:onProperty :AccionProyecto ;
+                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                    owl:onClass :Proyecto
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :implicaFase ;
+                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                    owl:onClass :F4_Transferencia
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :realizadaPor ;
+                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                    owl:onClass :Organizacion
+                                  ] ;
+                  rdfs:label "Accion Comercial"@es ,
+                             "Commercial Action"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Actividad_Desarrollo
+:Actividad_Desarrollo rdf:type owl:Class ;
+                      rdfs:subClassOf :Actividad_I_D_i ;
+                      rdfs:label "Actividad Desarrollo"@es ,
+                                 "Development Activity"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Actividad_I_D_i
+:Actividad_I_D_i rdf:type owl:Class ;
+                 owl:equivalentClass [ rdf:type owl:Class ;
+                                       owl:unionOf ( :Actividad_Desarrollo
+                                                     :Actividad_Innovacion
+                                                     :Actividad_Investigacion
+                                                   )
+                                     ] ;
+                 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                   owl:onProperty :tienenPlanificacion ;
+                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onClass :Planificacion_Actividades
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :areaEstrategica ;
+                                   owl:allValuesFrom xsd:string
+                                 ] ;
+                 rdfs:label "Actividad I D i"@es ,
+                            "R&D Activity"@en ,
+                            "R&D&I Activity"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Actividad_Innovacion
+:Actividad_Innovacion rdf:type owl:Class ;
+                      rdfs:subClassOf :Actividad_I_D_i ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :tipoActividadInnovacion ;
+                                        owl:allValuesFrom xsd:string
+                                      ] ;
+                      rdfs:label "Actividad Innovacion"@es ,
+                                 "Innovation Activity"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Actividad_Investigacion
+:Actividad_Investigacion rdf:type owl:Class ;
+                         rdfs:subClassOf :Actividad_I_D_i ;
+                         rdfs:label "Actividad Investigacion"@es ,
+                                    "Research Activity"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Acuerdo
+:Acuerdo rdf:type owl:Class ;
+         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                           owl:onProperty :esFirmadoPor ;
+                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onClass :Organizacion
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :esUnInstrumento ;
+                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onClass :Instrumento_Legal
+                         ] ;
+         rdfs:label "Acuerdo"@es ,
+                    "Agreement"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Acuerdo_Exclusividad
+:Acuerdo_Exclusividad rdf:type owl:Class ;
+                      rdfs:subClassOf :Acuerdo ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :acuerdoProviene ;
+                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onClass :Resultado_Proyecto
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :implicaFase ;
+                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onClass :F5_Mercado
+                                      ] ;
+                      rdfs:label "Acuerdo Exclusividad"@es ,
+                                 "Exclusivity Agreement"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Alianza
+:Alianza rdf:type owl:Class ;
+         rdfs:subClassOf :Acuerdo ;
+         rdfs:label "Alianza"@es ,
+                    "Alliance"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Articulo
+:Articulo rdf:type owl:Class ;
+          rdfs:subClassOf :Diseminacion_Cientifica ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :Autor ;
+                            owl:someValuesFrom :Empleado_Centro
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :revista ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onDataRange xsd:string
+                          ] ;
+          rdfs:label "Article"@en ,
+                     "Articulo"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Capital_Intelectual
+:Capital_Intelectual rdf:type owl:Class ;
+                     rdfs:subClassOf :Caracteristicas_Centro ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :incluyeConocimiento ;
+                                       owl:someValuesFrom :Conocimiento
+                                     ] ;
+                     rdfs:label "Capital Intelectual"@es ,
+                                "Intellectual Capital"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Caracteristicas_Centro
+:Caracteristicas_Centro rdf:type owl:Class ;
+                        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                          owl:onProperty :perteneceACentro ;
+                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                          owl:onClass :Centro
+                                        ] ;
+                        rdfs:label "Caracteristicas Centro"@es ,
+                                   "Center Characteristics"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Caracteristicas_Empleados
+:Caracteristicas_Empleados rdf:type owl:Class ;
+                           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                             owl:onProperty :esDeEmpleado ;
+                                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                             owl:onClass :Empleado
+                                           ] ;
+                           rdfs:label "Caracteristicas Empleados"@es ,
+                                      "Employee Characteristics"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Caracteristicas_proyecto
+:Caracteristicas_proyecto rdf:type owl:Class ;
+                          rdfs:label "Caracteristicas proyecto"@es ,
+                                     "Project Characteristics"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Cargo
+:Cargo rdf:type owl:Class ;
+       rdfs:subClassOf :Empleado_Centro ;
+       rdfs:label "Cargo"@es ,
+                  "Position"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Centro
+:Centro rdf:type owl:Class ;
+        owl:equivalentClass [ rdf:type owl:Class ;
+                              owl:unionOf ( :Centro_Sanitario
+                                            :IIS
+                                          )
+                            ] ;
+        rdfs:subClassOf :Institucion ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :desarrolla ;
+                          owl:allValuesFrom :Ensayo_Clinico
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :promueve ;
+                          owl:allValuesFrom :Ensayo_Clinico
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :tieneUAI ;
+                          owl:allValuesFrom :UAI
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :dirigidoPor ;
+                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onClass :Responsable
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :tieneCapitalIntelectual ;
+                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onClass :Capital_Intelectual
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :tieneCulturaInnovadora ;
+                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onClass :Cultura_Innovadora
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :tieneMetaI_D_i ;
+                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onClass :Meta_I_D_i
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :tieneObjetivoI_D_i ;
+                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onClass :Objetivo_I_D_i
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :tienePoliticaI_D_i ;
+                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onClass :Politica_I_D_i
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :tieneSistemaGestionI_D_i ;
+                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onClass :Sistema_Gestion_I_D_i
+                        ] ;
+        owl:disjointWith :Fundacion ;
+        rdfs:label "Center"@en ,
+                   "Centro"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Centro_Sanitario
+:Centro_Sanitario rdf:type owl:Class ;
+                  owl:equivalentClass [ owl:intersectionOf ( :Centro
+                                                             [ rdf:type owl:Class ;
+                                                               owl:complementOf :IIS
+                                                             ]
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] ;
+                  rdfs:subClassOf :Centro ;
+                  owl:disjointWith :IIS ;
+                  rdfs:label "Centro Sanitario"@es ,
+                             "Healthcare Center"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Competencias
+:Competencias rdf:type owl:Class ;
+              rdfs:subClassOf :Caracteristicas_Empleados ;
+              owl:disjointWith :Responsabilidades ;
+              rdfs:label "Competencias"@es ,
+                         "Competencies"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Conocimiento
+:Conocimiento rdf:type owl:Class ;
+              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                owl:onProperty :surgede ;
+                                owl:someValuesFrom :Resultado_Proyecto
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :formaParteDe ;
+                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                owl:onClass :Capital_Intelectual
+                              ] ;
+              rdfs:label "Conocimiento"@es ,
+                         "Knowledge"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Consorcio
+:Consorcio rdf:type owl:Class ;
+           owl:equivalentClass [ owl:intersectionOf ( :Caracteristicas_proyecto
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty :formadoPor ;
+                                                        owl:someValuesFrom owl:Thing
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] ;
+           rdfs:subClassOf :Caracteristicas_proyecto ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :formadoPor ;
+                             owl:someValuesFrom :Organizacion
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :llevaACaboProyecto ;
+                             owl:someValuesFrom :Proyecto
+                           ] ;
+           rdfs:label "Consorcio"@es ,
+                      "Consortium"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Contrato_I_D_i
+:Contrato_I_D_i rdf:type owl:Class ;
+                rdfs:subClassOf :Acuerdo ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :finalidadContrato ;
+                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onClass :Proyecto
+                                ] ;
+                rdfs:label "Contrato I D i"@es ,
+                           "R&D&I Contract"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Contrato_Transferencia
+:Contrato_Transferencia rdf:type owl:Class ;
+                        rdfs:subClassOf :Acuerdo ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :transfiere ;
+                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                          owl:onClass :Conocimiento
+                                        ] ;
+                        rdfs:label "Contrato Transferencia"@es ,
+                                   "Transfer Contract"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Convenio_Marco
+:Convenio_Marco rdf:type owl:Class ;
+                rdfs:subClassOf :Acuerdo ;
+                rdfs:label "Convenio Marco"@es ,
+                           "Framework Agreement"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Convocatoria
+:Convocatoria rdf:type owl:Class ;
+              rdfs:subClassOf :Caracteristicas_proyecto ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :incluyeProyecto ;
+                                owl:someValuesFrom :Proyecto
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :regidaPor ;
+                                owl:allValuesFrom :Politica_Tecnologica
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :resolucion ;
+                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                owl:onDataRange xsd:dateTime
+                              ] ;
+              rdfs:label "Call for Proposals"@en ,
+                         "Convocatoria"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Cultura_Innovadora
+:Cultura_Innovadora rdf:type owl:Class ;
+                    rdfs:subClassOf :Caracteristicas_Centro ;
+                    rdfs:label "Cultura Innovadora"@es ,
+                               "Innovative Culture"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Derecho_Autor
+:Derecho_Autor rdf:type owl:Class ;
+               rdfs:subClassOf :Tipos ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :tieneLicenciaDA ;
+                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onClass :Licencia
+                               ] ;
+               rdfs:label "Copyright"@en ,
+                          "Derecho Autor"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Derecho_Propiedad_Industrial
+:Derecho_Propiedad_Industrial rdf:type owl:Class ;
+                              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                owl:onProperty :estaLicenciadoEn ;
+                                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                owl:onClass :Licencia
+                                              ] ,
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty :protege ;
+                                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                owl:onClass :Resultado_Proyecto
+                                              ] ;
+                              rdfs:label "Derecho Propiedad Industrial"@es ,
+                                         "Industrial Property Rights"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Desarrollo_Tecnologico
+:Desarrollo_Tecnologico rdf:type owl:Class ;
+                        rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :DesarrolloDaA ;
+                                                                 owl:allValuesFrom :Mejora_Tecnologica
+                                                               ]
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :DesarrolloDaA ;
+                                                                 owl:allValuesFrom :Proceso
+                                                               ]
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :DesarrolloDaA ;
+                                                                 owl:allValuesFrom :Producto
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :procedeResultados ;
+                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                          owl:onClass :Resultado_Proyecto
+                                        ] ;
+                        rdfs:label "Desarrollo Tecnologico"@es ,
+                                   "Technological Development"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Difusion_Externa
+:Difusion_Externa rdf:type owl:Class ;
+                  rdfs:subClassOf :Eventos_Difusion ;
+                  owl:disjointWith :Difusion_Interna ;
+                  rdfs:label "Difusion Externa"@es ,
+                             "External Dissemination"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Difusion_Interna
+:Difusion_Interna rdf:type owl:Class ;
+                  owl:equivalentClass [ owl:intersectionOf ( :Eventos_Difusion
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty :dirigidoA ;
+                                                               owl:someValuesFrom :Empleado_Centro
+                                                             ]
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] ;
+                  rdfs:subClassOf :Eventos_Difusion ;
+                  rdfs:label "Difusion Interna"@es ,
+                             "Internal Dissemination"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Director
+:Director rdf:type owl:Class ;
+          owl:equivalentClass [ owl:intersectionOf ( :Responsable
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :dirige ;
+                                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                       owl:onClass :IIS
+                                                     ]
+                                                   ) ;
+                                rdf:type owl:Class
+                              ] ;
+          rdfs:subClassOf :Responsable ;
+          owl:disjointWith :Gerente ;
+          rdfs:label "Director"@en ,
+                     "Director"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Director_UAI
+:Director_UAI rdf:type owl:Class ;
+              owl:equivalentClass [ owl:intersectionOf ( :trabajaUAI
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty :dirige ;
+                                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                           owl:onClass :UAI
+                                                         ]
+                                                       ) ;
+                                    rdf:type owl:Class
+                                  ] ;
+              rdfs:subClassOf :trabajaUAI ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :asisteA ;
+                                owl:allValuesFrom :Reunion
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :jerarquia ;
+                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                owl:onDataRange xsd:integer
+                              ] ;
+              rdfs:label "Director UAI"@es ,
+                         "UAI Director"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Diseminacion_Cientifica
+:Diseminacion_Cientifica rdf:type owl:Class ;
+                         rdfs:subClassOf :Metodo_Diseminacion ;
+                         rdfs:label "Diseminacion Cientifica"@es ,
+                                    "Scientific Dissemination"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Diseno_Industrial
+:Diseno_Industrial rdf:type owl:Class ;
+                   rdfs:subClassOf :Tipos ;
+                   rdfs:label "Diseno Industrial"@es ,
+                              "Industrial Design"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Donacion
+:Donacion rdf:type owl:Class ;
+          rdfs:subClassOf :Acuerdo ;
+          rdfs:label "Donacion"@es ,
+                     "Donation"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#EBT
+:EBT rdf:type owl:Class ;
+     rdfs:subClassOf :Empresa ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :hayLicencia ;
+                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                       owl:onClass :Licencia
+                     ] ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :ebitda ;
+                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                       owl:onDataRange xsd:double
+                     ] ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :facturacionEBT ;
+                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                       owl:onDataRange xsd:double
+                     ] ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :fondosCaptadosEBT ;
+                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                       owl:onDataRange xsd:double
+                     ] ;
+     owl:disjointWith :Farmaceutica ;
+     rdfs:label "EBT"@en ,
+                "EBT"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Empleado
+:Empleado rdf:type owl:Class ;
+          owl:equivalentClass [ rdf:type owl:Class ;
+                                owl:unionOf ( :Empleado_Empresa
+                                              :Empleado_Institucion
+                                            )
+                              ] ;
+          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                            owl:onProperty :tieneCaracteristicasEmpleado ;
+                            owl:someValuesFrom :Caracteristicas_Empleados
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :asisteEventos ;
+                            owl:allValuesFrom :Eventos_Difusion
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :trabajaEn ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Organizacion
+                          ] ;
+          rdfs:label "Empleado"@es ,
+                     "Employee"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Empleado_Centro
+:Empleado_Centro rdf:type owl:Class ;
+                 owl:equivalentClass [ owl:intersectionOf ( :Empleado_Institucion
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :trabajaEn ;
+                                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                              owl:onClass :Centro
+                                                            ]
+                                                          ) ;
+                                       rdf:type owl:Class
+                                     ] ;
+                 rdfs:subClassOf :Empleado_Institucion ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :escribe ;
+                                   owl:allValuesFrom :Articulo
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :tieneIdea ;
+                                   owl:allValuesFrom :Idea
+                                 ] ;
+                 rdfs:label "Center Employee"@en ,
+                            "Empleado Centro"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Empleado_Empresa
+:Empleado_Empresa rdf:type owl:Class ;
+                  rdfs:subClassOf :Empleado ;
+                  owl:disjointWith :Empleado_Institucion ;
+                  rdfs:label "Company Employee"@en ,
+                             "Empleado Empresa"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Empleado_Institucion
+:Empleado_Institucion rdf:type owl:Class ;
+                      rdfs:subClassOf :Empleado ;
+                      rdfs:label "Empleado Institucion"@es ,
+                                 "Institution Employee"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Empresa
+:Empresa rdf:type owl:Class ;
+         rdfs:subClassOf :Organizacion ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :participaEnProyecto ;
+                           owl:allValuesFrom :Proyecto
+                         ] ;
+         owl:disjointWith :Institucion ;
+         rdfs:label "Company"@en ,
+                    "Empresa"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Ensayo
+:Ensayo rdf:type owl:Class ;
+        rdfs:subClassOf :Prototipo_Homologacion_Ensayo ;
+        rdfs:label "Ensayo"@es ,
+                   "Trial"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Ensayo_Clinico
+:Ensayo_Clinico rdf:type owl:Class ;
+                owl:equivalentClass [ rdf:type owl:Class ;
+                                      owl:unionOf ( :Medicamento
+                                                    :Producto_Sanitario
+                                                  )
+                                    ] ;
+                rdfs:subClassOf [ rdf:type owl:Class ;
+                                  owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                  owl:onProperty :PromovidoPorCentro ;
+                                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                  owl:onClass :Centro
+                                                ]
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty :PromovidoPorFarmaceutica ;
+                                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                  owl:onClass :Farmaceutica
+                                                ]
+                                              )
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :esDesarrolladoPor ;
+                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onClass :Centro
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :cuantiaEnsayo ;
+                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onDataRange xsd:double
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :fechaEnsayo ;
+                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onDataRange xsd:dateTime
+                                ] ;
+                rdfs:label "Clinical Trial"@en ,
+                           "Ensayo Clinico"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Estado
+:Estado rdf:type owl:Class ;
+        rdfs:subClassOf :Derecho_Propiedad_Industrial ;
+        rdfs:label "Estado"@es ,
+                   "Status"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Estado_Proyecto
+:Estado_Proyecto rdf:type owl:Class ;
+                 rdfs:subClassOf :Proyecto ;
+                 rdfs:label "Estado Proyecto"@es ,
+                            "Project Status"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Estudio_Mercado
+:Estudio_Mercado rdf:type owl:Class ;
+                 rdfs:subClassOf :Informe ;
+                 rdfs:label "Estudio Mercado"@es ,
+                            "Market Study"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Evaluacion_Marcha_Proyecto
+:Evaluacion_Marcha_Proyecto rdf:type owl:Class ;
+                            rdfs:subClassOf :Caracteristicas_proyecto ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty :EvaluaciónDe ;
+                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                              owl:onClass :Proyecto_Activo
+                                            ] ;
+                            rdfs:label "Evaluacion Marcha Proyecto"@es ,
+                                       "Project Progress Evaluation"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Evento
+:Evento rdf:type owl:Class ;
+        rdfs:subClassOf :Metodo_Diseminacion ;
+        rdfs:label "Event"@en ,
+                   "Evento"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Eventos_Difusion
+:Eventos_Difusion rdf:type owl:Class ;
+                  owl:equivalentClass [ rdf:type owl:Class ;
+                                        owl:unionOf ( :Difusion_Externa
+                                                      :Difusion_Interna
+                                                    )
+                                      ] ;
+                  rdfs:subClassOf :Diseminacion_Cientifica ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :organizadosPor ;
+                                    owl:allValuesFrom :UAI
+                                  ] ;
+                  rdfs:label "Dissemination Events"@en ,
+                             "Eventos Difusion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Explotacion
+:Explotacion rdf:type owl:Class ;
+             rdfs:subClassOf [ rdf:type owl:Restriction ;
+                               owl:onProperty :explota ;
+                               owl:allValuesFrom [ rdf:type owl:Class ;
+                                                   owl:unionOf ( :Mejora_Tecnologica
+                                                                 :Proceso
+                                                                 :Producto
+                                                               )
+                                                 ]
+                             ] ;
+             rdfs:label "Exploitation"@en ,
+                        "Explotacion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#F1_Captacion
+:F1_Captacion rdf:type owl:Class ;
+              rdfs:subClassOf :Fase_Embudo ;
+              rdfs:label "F1 Acquisition"@en ,
+                         "F1 Captacion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#F2_Evaluacion
+:F2_Evaluacion rdf:type owl:Class ;
+               rdfs:subClassOf :Fase_Embudo ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :daLugarA ;
+                                 owl:someValuesFrom :Proyecto
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :existeInforme ;
+                                 owl:someValuesFrom :Informe
+                               ] ;
+               rdfs:label "F2 Evaluacion"@es ,
+                          "F2 Evaluation"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#F3_Desarrollo
+:F3_Desarrollo rdf:type owl:Class ;
+               rdfs:subClassOf :Fase_Embudo ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :existePrototipo ;
+                                 owl:someValuesFrom :Prototipo_Homologacion_Ensayo
+                               ] ;
+               rdfs:label "F3 Desarrollo"@es ,
+                          "F3 Development"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#F4_Transferencia
+:F4_Transferencia rdf:type owl:Class ;
+                  rdfs:subClassOf :Fase_Embudo ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :existeAccionComercial ;
+                                    owl:someValuesFrom :Accion_Comercial
+                                  ] ;
+                  rdfs:label "F4 Transfer"@en ,
+                             "F4 Transferencia"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#F5_Mercado
+:F5_Mercado rdf:type owl:Class ;
+            rdfs:subClassOf :Fase_Embudo ,
+                            [ rdf:type owl:Class ;
+                              owl:unionOf ( [ rdf:type owl:Restriction ;
+                                              owl:onProperty :existeMercado ;
+                                              owl:someValuesFrom :Acuerdo_Exclusividad
+                                            ]
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty :existeMercado ;
+                                              owl:someValuesFrom :Licencia
+                                            ]
+                                          )
+                            ] .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Familia_Patente
+:Familia_Patente rdf:type owl:Class ;
+                 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                   owl:onProperty :tienePatente ;
+                                   owl:someValuesFrom :Patente
+                                 ] ;
+                 rdfs:label "Familia Patente"@es ,
+                            "Patent Family"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Farmaceutica
+:Farmaceutica rdf:type owl:Class ;
+              rdfs:subClassOf :Empresa ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :promueveFarm ;
+                                owl:allValuesFrom :Ensayo_Clinico
+                              ] ;
+              rdfs:label "Farmaceutica"@es ,
+                         "Pharmaceutical"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Fase_Embudo
+:Fase_Embudo rdf:type owl:Class ;
+             owl:equivalentClass [ rdf:type owl:Class ;
+                                   owl:unionOf ( :F1_Captacion
+                                                 :F2_Evaluacion
+                                                 :F3_Desarrollo
+                                                 :F4_Transferencia
+                                                 :F5_Mercado
+                                               )
+                                 ] ;
+             rdfs:label "Fase Embudo"@es ,
+                        "Funnel Phase"@en ,
+                        "Funnel Stage"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Financiacion_UAI
+:Financiacion_UAI rdf:type owl:Class ;
+                  rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                    owl:onProperty :perteneceUAI ;
+                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                    owl:onClass :UAI
+                                  ] ;
+                  rdfs:label "Financiacion UAI"@es ,
+                             "UAI Financing"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Formacion
+:Formacion rdf:type owl:Class ;
+           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                             owl:onProperty :perteneceATrUAI ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass :trabajaUAI
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :ambitoFormacion ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onDataRange xsd:string
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :tipoFormacion ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onDataRange xsd:string
+                           ] ;
+           rdfs:label "Formacion"@es ,
+                      "Training"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Fundacion
+:Fundacion rdf:type owl:Class ;
+           rdfs:subClassOf :Institucion ;
+           rdfs:label "Foundation"@en ,
+                      "Fundacion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Gerente
+:Gerente rdf:type owl:Class ;
+         owl:equivalentClass [ owl:intersectionOf ( :Responsable
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :dirige ;
+                                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                      owl:onClass :Centro_Sanitario
+                                                    ]
+                                                  ) ;
+                               rdf:type owl:Class
+                             ] ;
+         rdfs:subClassOf :Responsable ;
+         rdfs:label "Gerente"@es ,
+                    "Manager"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Grupo_Investigacion
+:Grupo_Investigacion rdf:type owl:Class ;
+                     rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :tieneInvestigador ;
+                                                              owl:someValuesFrom :IC
+                                                            ]
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :tieneInvestigador ;
+                                                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                              owl:onClass :IP
+                                                            ]
+                                                          ) ;
+                                       rdf:type owl:Class
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :realizaInvestigacion ;
+                                       owl:someValuesFrom :Actividad_Investigacion
+                                     ] ;
+                     rdfs:label "Grupo Investigacion"@es ,
+                                "Research Group"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Hardware
+:Hardware rdf:type owl:Class ;
+          rdfs:subClassOf :Producto ;
+          rdfs:label "Hardware"@en ,
+                     "Hardware"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Homologacion
+:Homologacion rdf:type owl:Class ;
+              rdfs:subClassOf :Prototipo_Homologacion_Ensayo ;
+              rdfs:label "Approval"@en ,
+                         "Homologacion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#IC
+:IC rdf:type owl:Class ;
+    rdfs:subClassOf :Investigador ;
+    owl:disjointWith :IP ;
+    rdfs:label "IC"@en ,
+               "IC"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#IIS
+:IIS rdf:type owl:Class ;
+     owl:equivalentClass [ owl:intersectionOf ( :Centro
+                                                [ rdf:type owl:Class ;
+                                                  owl:complementOf :Centro_Sanitario
+                                                ]
+                                              ) ;
+                           rdf:type owl:Class
+                         ] ;
+     rdfs:subClassOf :Centro ;
+     rdfs:label "IIS"@en ,
+                "IIS"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#IP
+:IP rdf:type owl:Class ;
+    rdfs:subClassOf :Investigador ;
+    rdfs:label "IP"@en ,
+               "IP"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#ITEMAS
+:ITEMAS rdf:type owl:Class ;
+        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                          owl:onProperty :tieneMiembro ;
+                          owl:someValuesFrom :Institucion
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :financiaUAI ;
+                          owl:allValuesFrom :Financiacion_UAI
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :tieneColaborador ;
+                          owl:allValuesFrom :Organizacion
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :gruposTrabajo ;
+                          owl:someValuesFrom xsd:string
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :financiacionITEMAS ;
+                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onDataRange xsd:double
+                        ] ;
+        rdfs:label "ITEMAS"@en ,
+                   "ITEMAS"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Idea
+:Idea rdf:type owl:Class ;
+      rdfs:subClassOf [ rdf:type owl:Class ;
+                        owl:unionOf ( [ rdf:type owl:Restriction ;
+                                        owl:onProperty :estaEnFaseEmbudo ;
+                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onClass :F1_Captacion
+                                      ]
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :estaEnFaseEmbudo ;
+                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onClass :F2_Evaluacion
+                                      ]
+                                    )
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :generates ;
+                        owl:allValuesFrom :Proyecto
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :ideaPerteneceA ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onClass :Empleado_Centro
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :tipoIdea ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onDataRange xsd:string
+                      ] ;
+      rdfs:label "Idea"@en ,
+                 "Idea"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Informe
+:Informe rdf:type owl:Class ;
+         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                           owl:onProperty :implicaFase ;
+                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onClass :F2_Evaluacion
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :vieneDe ;
+                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onClass :Proyecto
+                         ] ;
+         rdfs:label "Informe"@es ,
+                    "Report"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Informe_Pantetabilidad
+:Informe_Pantetabilidad rdf:type owl:Class ;
+                        rdfs:subClassOf :Informe ;
+                        rdfs:label "Informe Pantetabilidad"@es ,
+                                   "Patentability Report"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Informe_Valor_Producto
+:Informe_Valor_Producto rdf:type owl:Class ;
+                        rdfs:subClassOf :Informe ;
+                        rdfs:label "Informe Valor Producto"@es ,
+                                   "Product Value Report"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Institucion
+:Institucion rdf:type owl:Class ;
+             rdfs:subClassOf :Organizacion ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :esMiembroEn ;
+                               owl:allValuesFrom :ITEMAS
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :participaSpinfOff ;
+                               owl:allValuesFrom :SpinOff
+                             ] ;
+             rdfs:label "Institucion"@es ,
+                        "Institution"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Instrumento_Legal
+:Instrumento_Legal rdf:type owl:Class ;
+                   rdfs:label "Instrumento Legal"@es ,
+                              "Legal Instrument"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Investigador
+:Investigador rdf:type owl:Class ;
+              rdfs:subClassOf :Cargo ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :perteneceAGrupo ;
+                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                owl:onClass :Grupo_Investigacion
+                              ] ;
+              rdfs:label "Investigador"@es ,
+                         "Researcher"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Know_How
+:Know_How rdf:type owl:Class ;
+          rdfs:subClassOf :Tipos ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :tieneLicenciaKH ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Licencia
+                          ] ;
+          rdfs:label "Know How"@es ,
+                     "Know-How"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Licencia
+:Licencia rdf:type owl:Class ;
+          rdfs:subClassOf :Acuerdo ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :daLugarAEBT ;
+                            owl:allValuesFrom :EBT
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :implicaFase ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :F5_Mercado
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :licenciaUn ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Derecho_Propiedad_Industrial
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :cuantiaLicencia ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onDataRange xsd:double
+                          ] ;
+          rdfs:label "Licencia"@es ,
+                     "License"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#MTA
+:MTA rdf:type owl:Class ;
+     rdfs:subClassOf :Acuerdo ;
+     rdfs:label "MTA"@en ,
+                "MTA"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Marca
+:Marca rdf:type owl:Class ;
+       rdfs:subClassOf :Tipos ;
+       rdfs:label "Marca"@es ,
+                  "Trademark"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Material
+:Material rdf:type owl:Class ;
+          rdfs:subClassOf :Producto ;
+          rdfs:label "Material"@en ,
+                     "Material"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Mecenazgo
+:Mecenazgo rdf:type owl:Class ;
+           rdfs:subClassOf :Acuerdo ;
+           rdfs:label "Mecenazgo"@es ,
+                      "Sponsorship"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Medicamento
+:Medicamento rdf:type owl:Class ;
+             rdfs:subClassOf :Ensayo_Clinico ;
+             owl:disjointWith :Producto_Sanitario ;
+             rdfs:label "Medicamento"@es ,
+                        "Medication"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Mejora_Tecnologica
+:Mejora_Tecnologica rdf:type owl:Class ;
+                    rdfs:label "Mejora Tecnologica"@es ,
+                               "Technological Improvement"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Meta_I_D_i
+:Meta_I_D_i rdf:type owl:Class ;
+            rdfs:subClassOf :Caracteristicas_Centro ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :surgeDeObjetivo ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onClass :Objetivo_I_D_i
+                            ] ;
+            rdfs:label "Meta I D i"@es ,
+                       "R&D&I Goal"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Metodo_Diseminacion
+:Metodo_Diseminacion rdf:type owl:Class ;
+                     owl:equivalentClass [ rdf:type owl:Restriction ;
+                                           owl:onProperty :publica ;
+                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                           owl:onClass :Resultado_Proyecto
+                                         ] ;
+                     rdfs:label "Dissemination Method"@en ,
+                                "Metodo Diseminacion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Modelo_Utilidad
+:Modelo_Utilidad rdf:type owl:Class ;
+                 rdfs:subClassOf :Tipos ;
+                 rdfs:label "Modelo Utilidad"@es ,
+                            "Utility Model"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#NDA
+:NDA rdf:type owl:Class ;
+     rdfs:subClassOf :Acuerdo ;
+     rdfs:label "NDA"@en ,
+                "NDA"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Naturaleza_Proyecto
+:Naturaleza_Proyecto rdf:type owl:Class ;
+                     rdfs:subClassOf :Proyecto ;
+                     rdfs:label "Naturaleza Proyecto"@es ,
+                                "Project Nature"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Noticia
+:Noticia rdf:type owl:Class ;
+         rdfs:subClassOf :Metodo_Diseminacion ;
+         rdfs:label "News"@en ,
+                    "Noticia"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Objetivo_I_D_i
+:Objetivo_I_D_i rdf:type owl:Class ;
+                rdfs:subClassOf :Caracteristicas_Centro ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :esOriginadoEn ;
+                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onClass :Politica_I_D_i
+                                ] ;
+                rdfs:label "Objetivo I D i"@es ,
+                           "R&D&I Objective"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Objetivo_Proyecto
+:Objetivo_Proyecto rdf:type owl:Class ;
+                   rdfs:subClassOf :Caracteristicas_proyecto ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :perteneceAProyecto ;
+                                     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onClass :Proyecto
+                                   ] ;
+                   rdfs:label "Objetivo Proyecto"@es ,
+                              "Project Objective"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Organizacion
+:Organizacion rdf:type owl:Class ;
+              owl:equivalentClass [ rdf:type owl:Class ;
+                                    owl:unionOf ( :Empresa
+                                                  :Institucion
+                                                )
+                                  ] ;
+              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                owl:onProperty :esSociaDe ;
+                                owl:allValuesFrom :Consorcio
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :financia ;
+                                owl:allValuesFrom :Proyecto
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :firma ;
+                                owl:allValuesFrom :Acuerdo
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :realizaAccion ;
+                                owl:allValuesFrom :Accion_Comercial
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :esColaboradoraEn ;
+                                owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                owl:onClass :ITEMAS
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :ambitoOrganizacion ;
+                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                owl:onDataRange xsd:string
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :tipoOrganizacion ;
+                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                owl:onDataRange xsd:string
+                              ] ;
+              rdfs:label "Organizacion"@es ,
+                         "Organization"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#PI_Concedida
+:PI_Concedida rdf:type owl:Class ;
+              rdfs:subClassOf :Estado ;
+              rdfs:label "Granted IP"@en ,
+                         "PI Concedida"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#PI_Explotacion
+:PI_Explotacion rdf:type owl:Class ;
+                rdfs:subClassOf :Estado ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :tieneLicenciaPI ;
+                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onClass :Licencia
+                                ] ;
+                rdfs:label "IP Exploitation"@en ,
+                           "PI Explotacion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#PI_Solicitada
+:PI_Solicitada rdf:type owl:Class ;
+               rdfs:subClassOf :Estado ;
+               rdfs:label "PI Solicitada"@es ,
+                          "Requested IP"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Patente
+:Patente rdf:type owl:Class ;
+         rdfs:subClassOf :Tipos ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :pertenecePatente ;
+                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onClass :Familia_Patente
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :oficinaPatente ;
+                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onDataRange xsd:string
+                         ] ;
+         rdfs:label "Patent"@en ,
+                    "Patente"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Planificacion_Actividades
+:Planificacion_Actividades rdf:type owl:Class ;
+                           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                             owl:onProperty :planifica ;
+                                             owl:someValuesFrom :Actividad_I_D_i
+                                           ] ;
+                           rdfs:label "Activity Planning"@en ,
+                                      "Planificacion Actividades"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Politica_I_D_i
+:Politica_I_D_i rdf:type owl:Class ;
+                rdfs:subClassOf :Caracteristicas_Centro ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :originaObjetivo ;
+                                  owl:someValuesFrom :Objetivo_I_D_i
+                                ] ;
+                rdfs:label "Politica I D i"@es ,
+                           "R&D&I Policy"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Politica_Tecnologica
+:Politica_Tecnologica rdf:type owl:Class ;
+                      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                        owl:onProperty :daAConvocatoria ;
+                                        owl:allValuesFrom :Convocatoria
+                                      ] ;
+                      rdfs:label "Politica Tecnologica"@es ,
+                                 "Technology Policy"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Proceso
+:Proceso rdf:type owl:Class ;
+         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                           owl:onProperty :ProcesoDaA ;
+                           owl:allValuesFrom :Producto
+                         ] ;
+         rdfs:label "Proceso"@es ,
+                    "Process"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Producto
+:Producto rdf:type owl:Class ;
+          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                            owl:onProperty :vieneDeProceso ;
+                            owl:allValuesFrom :Proceso
+                          ] ;
+          rdfs:label "Product"@en ,
+                     "Producto"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Producto_Sanitario
+:Producto_Sanitario rdf:type owl:Class ;
+                    rdfs:subClassOf :Ensayo_Clinico ;
+                    rdfs:label "Medical Product"@en ,
+                               "Producto Sanitario"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Prototipo
+:Prototipo rdf:type owl:Class ;
+           rdfs:subClassOf :Prototipo_Homologacion_Ensayo ;
+           rdfs:label "Prototipo"@es ,
+                      "Prototype"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Prototipo_Homologacion_Ensayo
+:Prototipo_Homologacion_Ensayo rdf:type owl:Class ;
+                               owl:equivalentClass [ rdf:type owl:Class ;
+                                                     owl:unionOf ( :Ensayo
+                                                                   :Homologacion
+                                                                   :Prototipo
+                                                                 )
+                                                   ] ;
+                               rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :implicaFase ;
+                                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                 owl:onClass :F3_Desarrollo
+                                               ] ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :vieneDePr ;
+                                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                 owl:onClass :Proyecto
+                                               ] ;
+                               rdfs:label "Approval Prototype Test"@en ,
+                                          "Prototipo Homologacion Ensayo"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Proyecto
+:Proyecto rdf:type owl:Class ;
+          rdfs:subClassOf [ rdf:type owl:Class ;
+                            owl:unionOf ( [ rdf:type owl:Restriction ;
+                                            owl:onProperty :estaEnFaseEmbudo ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass :F3_Desarrollo
+                                          ]
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :estaEnFaseEmbudo ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass :F4_Transferencia
+                                          ]
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :estaEnFaseEmbudo ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass :F5_Mercado
+                                          ]
+                                        )
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :tieneObjetivosProyecto ;
+                            owl:someValuesFrom :Objetivo_Proyecto
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :participadoPor ;
+                            owl:allValuesFrom :Empresa
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :puedeDarAInforme ;
+                            owl:allValuesFrom :Informe
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :puedeDarAccion ;
+                            owl:allValuesFrom :Accion_Comercial
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :puedeDarProt ;
+                            owl:allValuesFrom :Prototipo_Homologacion_Ensayo
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :tieneConsorcio ;
+                            owl:allValuesFrom :Consorcio
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :tieneConvocatoria ;
+                            owl:allValuesFrom :Convocatoria
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :tieneEntidadFinanciera ;
+                            owl:allValuesFrom :Organizacion
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :tieneProyecto ;
+                            owl:allValuesFrom :Caracteristicas_proyecto
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :arisesFrom ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Idea
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :estaFirmadoEn ;
+                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Contrato_I_D_i
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :ambitoProyecto ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onDataRange xsd:string
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :tipoProyecto ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onDataRange xsd:string
+                          ] ;
+          rdfs:label "Project"@en ,
+                     "Proyecto"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Proyecto_Activo
+:Proyecto_Activo rdf:type owl:Class ;
+                 rdfs:subClassOf :Estado_Proyecto ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :tieneResultados ;
+                                   owl:allValuesFrom :Resultado_Proyecto
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :tieneEvaluacion ;
+                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onClass :Evaluacion_Marcha_Proyecto
+                                 ] ;
+                 rdfs:label "Active Project"@en ,
+                            "Proyecto Activo"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Proyecto_Cerrado
+:Proyecto_Cerrado rdf:type owl:Class ;
+                  rdfs:subClassOf :Estado_Proyecto ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :tieneResultados ;
+                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                    owl:onClass :Resultado_Proyecto
+                                  ] ;
+                  rdfs:label "Closed Project"@en ,
+                             "Proyecto Cerrado"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Proyecto_Concedido
+:Proyecto_Concedido rdf:type owl:Class ;
+                    rdfs:subClassOf :Estado_Proyecto ;
+                    rdfs:label "Granted Project"@en ,
+                               "Proyecto Concedido"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Proyecto_Denegado
+:Proyecto_Denegado rdf:type owl:Class ;
+                   rdfs:subClassOf :Estado_Proyecto ;
+                   rdfs:label "Proyecto Denegado"@es ,
+                              "Rejected Project"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Proyecto_Desarrollo
+:Proyecto_Desarrollo rdf:type owl:Class ;
+                     rdfs:subClassOf :Naturaleza_Proyecto ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :realizaActividades ;
+                                       owl:someValuesFrom :Actividad_Desarrollo
+                                     ] ;
+                     rdfs:label "Development Project"@en ,
+                                "Proyecto Desarrollo"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Proyecto_Innovacion
+:Proyecto_Innovacion rdf:type owl:Class ;
+                     rdfs:subClassOf :Naturaleza_Proyecto ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :realizaActividades ;
+                                       owl:someValuesFrom :Actividad_Innovacion
+                                     ] ;
+                     rdfs:label "Innovation Project"@en ,
+                                "Proyecto Innovacion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Proyecto_Investigacion
+:Proyecto_Investigacion rdf:type owl:Class ;
+                        rdfs:subClassOf :Naturaleza_Proyecto ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :realizaActividades ;
+                                          owl:someValuesFrom :Actividad_Investigacion
+                                        ] ;
+                        rdfs:label "Proyecto Investigacion"@es ,
+                                   "Research Project"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Proyecto_Solicitado
+:Proyecto_Solicitado rdf:type owl:Class ;
+                     rdfs:subClassOf :Estado_Proyecto ;
+                     rdfs:label "Proyecto Solicitado"@es ,
+                                "Requested Project"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Responsabilidades
+:Responsabilidades rdf:type owl:Class ;
+                   rdfs:subClassOf :Caracteristicas_Empleados ;
+                   rdfs:label "Responsabilidades"@es ,
+                              "Responsibilities"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Responsable
+:Responsable rdf:type owl:Class ;
+             rdfs:subClassOf :Cargo ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :asisteA ;
+                               owl:allValuesFrom :Reunion
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :dirige ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass :Centro
+                             ] ;
+             rdfs:label "Responsable"@es ,
+                        "Responsible"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Resultado_Proyecto
+:Resultado_Proyecto rdf:type owl:Class ;
+                    rdfs:subClassOf :Caracteristicas_proyecto ,
+                                    [ rdf:type owl:Class ;
+                                      owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :resultadoDe ;
+                                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                      owl:onClass :Proyecto_Activo
+                                                    ]
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :resultadoDe ;
+                                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                      owl:onClass :Proyecto_Cerrado
+                                                    ]
+                                                  )
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :daLugarADesarrollo ;
+                                      owl:allValuesFrom :Desarrollo_Tecnologico
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :daLugarAcuerdo ;
+                                      owl:allValuesFrom :Acuerdo_Exclusividad
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :esProtegidoPor ;
+                                      owl:allValuesFrom :Derecho_Propiedad_Industrial
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :genera ;
+                                      owl:allValuesFrom :Conocimiento
+                                    ] ;
+                    rdfs:label "Project Result"@en ,
+                               "Resultado Proyecto"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Reunion
+:Reunion rdf:type owl:Class ;
+         rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                  owl:onProperty :tieneAsistentes ;
+                                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                  owl:onClass :Director_UAI
+                                                ]
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty :tieneAsistentes ;
+                                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                  owl:onClass :Responsable
+                                                ]
+                                              ) ;
+                           rdf:type owl:Class
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :frecuencia ;
+                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onDataRange xsd:integer
+                         ] ;
+         rdfs:label "Meeting"@en ,
+                    "Reunion"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Secreto_Industrial
+:Secreto_Industrial rdf:type owl:Class ;
+                    rdfs:subClassOf :Tipos ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :tieneLicenciaSI ;
+                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onClass :Licencia
+                                    ] ;
+                    rdfs:label "Industrial Secret"@en ,
+                               "Secreto Industrial"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Servicio
+:Servicio rdf:type owl:Class ;
+          rdfs:subClassOf :Producto ;
+          rdfs:label "Service"@en ,
+                     "Servicio"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Servicio_I_D_i
+:Servicio_I_D_i rdf:type owl:Class ;
+                rdfs:subClassOf :Servicio ;
+                rdfs:label "R&D&I Service"@en ,
+                           "Servicio I D i"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Sistema_Gestion_I_D_i
+:Sistema_Gestion_I_D_i rdf:type owl:Class ;
+                       rdfs:subClassOf :Caracteristicas_Centro ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :objetivoSistema ;
+                                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                         owl:onClass :Politica_I_D_i
+                                       ] ;
+                       rdfs:label "R&D&I Management System"@en ,
+                                  "Sistema Gestion I D i"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Software
+:Software rdf:type owl:Class ;
+          rdfs:subClassOf :Producto ;
+          rdfs:label "Software"@en ,
+                     "Software"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#SpinOff
+:SpinOff rdf:type owl:Class ;
+         owl:equivalentClass [ owl:intersectionOf ( :EBT
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :participadaPor ;
+                                                      owl:someValuesFrom :Institucion
+                                                    ]
+                                                  ) ;
+                               rdf:type owl:Class
+                             ] ;
+         rdfs:subClassOf :EBT ;
+         owl:disjointWith :StartUp ;
+         rdfs:label "Spin-Off"@en ,
+                    "SpinOff"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#StartUp
+:StartUp rdf:type owl:Class ;
+         owl:equivalentClass [ owl:intersectionOf ( :EBT
+                                                    [ rdf:type owl:Class ;
+                                                      owl:complementOf :SpinOff
+                                                    ]
+                                                  ) ;
+                               rdf:type owl:Class
+                             ] ;
+         rdfs:subClassOf :EBT ;
+         rdfs:label "StartUp"@es ,
+                    "Startup"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Tipos
+:Tipos rdf:type owl:Class ;
+       rdfs:subClassOf :Derecho_Propiedad_Industrial ;
+       rdfs:label "Tipos"@es ,
+                  "Types"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Transferencia_Tecnologica
+:Transferencia_Tecnologica rdf:type owl:Class ;
+                           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                             owl:onProperty :aPartirDeLicencia ;
+                                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                             owl:onClass :Licencia
+                                           ] ;
+                           rdfs:label "Technology Transfer"@en ,
+                                      "Transferencia Tecnologica"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#UAI
+:UAI rdf:type owl:Class ;
+     rdfs:subClassOf [ rdf:type owl:Restriction ;
+                       owl:onProperty :tiene ;
+                       owl:someValuesFrom :Financiacion_UAI
+                     ] ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :organizaEvento ;
+                       owl:allValuesFrom :Eventos_Difusion
+                     ] ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :tieneUnidades ;
+                       owl:allValuesFrom :Unidades_UAI
+                     ] ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :UAIDeCentro ;
+                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                       owl:onClass :Centro
+                     ] ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :dirigidaPor ;
+                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                       owl:onClass :Director_UAI
+                     ] ;
+     rdfs:label "UAI"@en ,
+                "UAI"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Unidad_Gestion_I_D_i
+:Unidad_Gestion_I_D_i rdf:type owl:Class ;
+                      rdfs:subClassOf :Unidades_UAI ;
+                      owl:disjointWith :Unidad_I_D_i ;
+                      rdfs:label "R&D&I Management Unit"@en ,
+                                 "Unidad Gestion I D i"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Unidad_I_D_i
+:Unidad_I_D_i rdf:type owl:Class ;
+              rdfs:subClassOf :Unidades_UAI ;
+              rdfs:label "R&D&I Unit"@en ,
+                         "Unidad I D i"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Unidades_UAI
+:Unidades_UAI rdf:type owl:Class ;
+              owl:equivalentClass [ rdf:type owl:Class ;
+                                    owl:unionOf ( :Unidad_Gestion_I_D_i
+                                                  :Unidad_I_D_i
+                                                )
+                                  ] ;
+              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                owl:onProperty :perteneceAUAI ;
+                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                owl:onClass :UAI
+                              ] ;
+              rdfs:label "UAI Units"@en ,
+                         "Unidades UAI"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Viabilidad_Técnica
+:Viabilidad_Técnica rdf:type owl:Class ;
+                    rdfs:subClassOf :Informe ;
+                    rdfs:label "Viabilidad Técnica"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Vigilancia_Tecnologica
+:Vigilancia_Tecnologica rdf:type owl:Class ;
+                        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                          owl:onProperty :esUna ;
+                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                          owl:onClass :Actividad_Innovacion
+                                        ] ;
+                        rdfs:label "Technology Surveillance"@en ,
+                                   "Vigilancia Tecnologica"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#trabajaUAI
+:trabajaUAI rdf:type owl:Class ;
+            owl:equivalentClass [ owl:intersectionOf ( :Empleado_Centro
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty :trabajaEn ;
+                                                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                         owl:onClass :UAI
+                                                       ]
+                                                     ) ;
+                                  rdf:type owl:Class
+                                ] ;
+            rdfs:subClassOf :Empleado_Centro ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :tieneFormacion ;
+                              owl:someValuesFrom :Formacion
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :jcr ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onDataRange xsd:double
+                            ] ;
+            rdfs:label "Works UAI"@en ,
+                       "trabajaUAI"@es .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Centro_Sanit1
+:Centro_Sanit1 rdf:type owl:NamedIndividual ,
+                        :IIS ;
+               rdfs:label "Centro Sanit1"@es ,
+                          "Health Center1"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Empleado1
+:Empleado1 rdf:type owl:NamedIndividual ,
+                    :Empleado ;
+           :dirige :Centro_Sanit1 ;
+           rdfs:label "Empleado1"@es ,
+                      "Employee1"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#EmpresaBT1
+:EmpresaBT1 rdf:type owl:NamedIndividual ,
+                     :StartUp ;
+            rdfs:label "CompanyBT1"@en ,
+                       "EmpresaBT1"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#F5_Mercado
+:F5_Mercado rdf:type owl:NamedIndividual ,
+                     :F5_Mercado .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Licencia1
+:Licencia1 rdf:type owl:NamedIndividual ,
+                    :Licencia ;
+           :daLugarAEBT :EmpresaBT1 ;
+           :implicaFase :F5_Mercado ;
+           rdfs:label "Licencia1"@es ,
+                      "License1"@en .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Patente1
+:Patente1 rdf:type owl:NamedIndividual ,
+                   :PI_Concedida ,
+                   :Patente ;
+          :estaLicenciadoEn :Licencia1 ;
+          rdfs:label "Patent1"@en ,
+                     "Patente1"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Proyecto1
+:Proyecto1 rdf:type owl:NamedIndividual ,
+                    :Proyecto_Cerrado ,
+                    :Proyecto_Investigacion ;
+           :tieneResultados :Resultado1 ;
+           rdfs:label "Project1"@en ,
+                      "Proyecto1"@es .
+
+
+###  http://www.semanticweb.org/avl/ontologies/2017/7/ITEMAS_v1.2#Resultado1
+:Resultado1 rdf:type owl:NamedIndividual ,
+                     :Resultado_Proyecto ;
+            :esProtegidoPor :Patente1 ;
+            rdfs:label "Result1"@en ,
+                       "Resultado1"@es .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+:F5_Mercado rdfs:label "F5 Market"@en ,
+                       "F5 Mercado"@es .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Actividad_Desarrollo
+                :Actividad_Innovacion
+                :Actividad_Investigacion
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Acuerdo_Exclusividad
+                :Alianza
+                :Contrato_I_D_i
+                :Contrato_Transferencia
+                :Convenio_Marco
+                :Donacion
+                :Licencia
+                :MTA
+                :Mecenazgo
+                :NDA
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Diseno_Industrial
+                :Marca
+                :Modelo_Utilidad
+                :Patente
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Ensayo
+                :Homologacion
+                :Prototipo
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Estudio_Mercado
+                :Informe_Pantetabilidad
+                :Informe_Valor_Producto
+                :Viabilidad_Técnica
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :F1_Captacion
+                :F2_Evaluacion
+                :F3_Desarrollo
+                :F4_Transferencia
+                :F5_Mercado
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Hardware
+                :Material
+                :Servicio
+                :Software
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Hardware
+                :Material
+                :Software
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :PI_Concedida
+                :PI_Explotacion
+                :PI_Solicitada
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Proyecto_Activo
+                :Proyecto_Cerrado
+                :Proyecto_Concedido
+                :Proyecto_Denegado
+                :Proyecto_Solicitado
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Proyecto_Desarrollo
+                :Proyecto_Innovacion
+                :Proyecto_Investigacion
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
